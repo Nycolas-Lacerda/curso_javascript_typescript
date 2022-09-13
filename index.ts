@@ -1,9 +1,9 @@
 // função com parametros tipados como number aceitam int/float
-function soma(num1: number, num2: number){
+function somaExemplo(num1: number, num2: number){
     console.log(num1 + num2);
 }
 
-soma(1, 3.3); // chamada da função
+somaExemplo(1, 3.3); // chamada da função
 
 // criação do tipo de objeto Carro, o mesmo é utilizado abaixo
 type Carro = { 
@@ -23,3 +23,4 @@ const carro: Carro = {
 
 console.log(carro);
 console.log(carro.id, carro.modelo, carro.ano, carro.fabricante);
+
