@@ -1,9 +1,9 @@
 "use strict";
 // função com parametros tipados como number aceitam int/float
-function soma(num1, num2) {
+function somaExemplo(num1, num2) {
     console.log(num1 + num2);
 }
-soma(1, 3.3); // chamada da função
+somaExemplo(1, 3.3); // chamada da função
 // utilização do tipo Carro
 const carro = {
     id: 1,
