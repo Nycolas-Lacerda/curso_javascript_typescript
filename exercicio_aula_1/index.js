@@ -35,8 +35,6 @@ media5(10, 32, 54, 45, 91); // chamada da função media5
 */
 function calculaIMC(peso, altura) {
     let calculo = peso / (Math.pow(altura, 2));
-    let calculo2 = peso / (altura * altura);
     console.log("O IMC é:", calculo);
-    console.log("O IMC é:", calculo2);
 }
 calculaIMC(52.6, 1.78); // chamada da função calculaIMC
