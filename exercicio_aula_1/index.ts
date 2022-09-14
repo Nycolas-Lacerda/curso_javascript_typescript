@@ -6,6 +6,11 @@
  * num1         type number 
  * num2         type number 
 */
+
+console.log("------------------------------------------------------------------------------");
+console.log("Aula 1");
+
+
 function soma(num1: number, num2: number){ 
     console.log("A soma é:",num1 + num2); // retorno da função num1 somado ao num 2
 }
