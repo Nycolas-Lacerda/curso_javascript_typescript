@@ -74,13 +74,11 @@ function geraMatriz(final: number, tam: number){
         array[i] = i + 1;
     }
     for(let i = 0; i < final; i++){
-        if(i % 3 === 0){
+        if(i % tam === 0){
             matriz[cont] = array.slice(i, i + tam);
             cont++;
         } 
-        
     }
-
     return matriz;
 }
 
