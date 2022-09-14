@@ -78,7 +78,6 @@ function geraMatriz(final: number, tam: number){
             matriz[cont] = array.slice(i, i + tam);
             cont++;
         } 
-        
     }
 
     return matriz;
