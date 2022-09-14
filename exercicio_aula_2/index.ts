@@ -84,7 +84,7 @@ function geraMatriz(final: number, tam: number){
     return matriz;
 }
 
-console.log("Matriz gerada:",geraMatriz(35, 3));
+console.log("Matriz gerada:", geraMatriz(35, 3));
 
 /**
  * função que recebe o valor final[final] do array e o tamanho[tam] dos arrays que serão gerados para serem inseridos
@@ -96,13 +96,16 @@ console.log("Matriz gerada:",geraMatriz(35, 3));
 function geraMatrizSomada(final: number, tam: number){
     const matriz = geraMatriz(final, tam);
     return matriz.map((arr, ind) => {
-        return arr.reduce((acumula, arr) => {
-            return acumula + arr;
+        let arraySoma = [0];
+        
+        arraySoma[0] = arr.reduce((val, id) => {
+            return val + id;
         });
+        return arraySoma;
     })
 }
 
-console.log("Matriz somada gerada:",geraMatrizSomada(27, 3));
+console.log("Matriz somada gerada:", geraMatrizSomada(27, 3));
 /* abaixo exemplo de uso do reduce 
     const blusas = [
         {
