@@ -1,0 +1,10 @@
+#root{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    padding: 56px;
+    gap: 12px;
+}
+
+.item-wrapper{
+    background-color: aqua;
+}

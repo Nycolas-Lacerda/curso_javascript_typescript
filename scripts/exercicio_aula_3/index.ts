@@ -41,6 +41,7 @@ const produtos1 = [
 const rootElement = document.querySelector("#root");
 console.log(rootElement);
 
+
 if(rootElement){ 
     console.log(1);
     
