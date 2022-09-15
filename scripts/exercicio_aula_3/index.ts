@@ -1,56 +1,78 @@
 console.log("------------------------------------------------------------------------------");
-console.log("Aula 3");
+console.log("Aula 3 / 4");
+
+type Produto = {id: number; marca: string; modelo: string; preco: number}
+
 const produtos1 = [
         {
-          id: 1,
-          modelo: "blusa do zé jacaré",
-          marca: "lacosta",
-          categoria: "blusa",
+            id: 1,
+            modelo: "blusa do zé jacaré",
+            marca: "lacosta",
+            preco: 12.5,
         },
         {
-          id: 2,
-          modelo: "bermuda do zé jacaré",
-          marca: "lacosta",
-          categoria: "bermuda",
+            id: 2,
+            modelo: "bermuda do zé jacaré",
+            marca: "lacosta",
+            preco: 12.5,
         },
         {
-          id: 3,
-          modelo: "chapéu do zé jacaré",
-          marca: "lacosta",
-          categoria: "acessorios",
+            id: 3,
+            modelo: "chapéu do zé jacaré",
+            marca: "lacosta",
+            preco: 12.5,
         },
         {
             id: 4,
             modelo: "blusa do pica-pau",
-            marca: "lacosta",
-            categoria: "blusa",
+            marca: "passarus",
+            preco: 12.5,
         },
         {
             id: 5,
             modelo: "bermuda do pica-pau",
-            marca: "lacosta",
-            categoria: "bermuda",
+            marca: "passarus",
+            preco: 12.5,
         },
         {
             id: 6,
             modelo: "chapéu do pica-pau",
-            marca: "lacosta",
-            categoria: "acessorios",
+            marca: "passarus",
+            preco: 12.5,
         },
     ];
 const rootElement = document.querySelector("#root");
-console.log(rootElement);
+const searcButtonElement = document.querySelector("#search-button");
+const searcInputElement = document.querySelector("#input-pesquisar");
+const searcSelectElement = document.querySelector("#filter-type-select");
 
-if(rootElement){ 
-    console.log(1);
-    
-    produtos1.forEach((produto) => {
-        rootElement.innerHTML += `
-            <div class="item-wrapper">
-                <h2>${produto.modelo}</h2>
-                <h3>${produto.categoria}</h3>
-                <h4>${produto.marca}</h4>
-            </div>
-        `;
-    });
+function render(itens: Produto[]){
+    if(rootElement){   
+        rootElement.innerHTML = '';    
+        itens.forEach((item) => {
+            rootElement.innerHTML += `
+                <div class="item-wrapper">
+                    <h2>${item.modelo}</h2>
+                    <h3>${item.preco}</h3>
+                    <h4>${item.marca}</h4>
+                </div>
+            `;
+        });
+    }
 }
+
+function search(){
+    const searchInputValue = (searcInputElement as HTMLInputElement).value;
+    const filterTypeValue = (searcSelectElement as HTMLSelectElement).value as keyof Pick<Produto, 'marca' | 'modelo'>;
+    // const filterTypeValue2 = (searcSelectElement as HTMLSelectElement).value as keyof Omit<Produto, 'id' | 'preco'>;
+
+    const newProdutos = produtos1.filter((produto) => produto[filterTypeValue].includes(searchInputValue));
+    render(newProdutos);
+}
+
+function eventListenerHandle(){
+    (searcButtonElement as HTMLButtonElement)?.addEventListener('click',search)
+}
+
+render(produtos1);
+eventListenerHandle();

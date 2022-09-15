@@ -87,7 +87,7 @@ console.log("Matriz gerada:", geraMatriz(35, 3));
 */
 function geraMatrizSomada(final, tam) {
     const matriz = geraMatriz(final, tam);
-    return matriz.map((arr, ind) => {
+    return matriz.map((arr) => {
         let arraySoma = [0];
         arraySoma[0] = arr.reduce((val, id) => {
             return val + id;
