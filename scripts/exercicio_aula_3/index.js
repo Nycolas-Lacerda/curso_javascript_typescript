@@ -48,14 +48,14 @@ const produtos2 = [
     { id: 6, modelo: "chapéu do pica-pau", marca: "passarus", preco: 12.5, tamanho: 'G', cores: ['branco', 'azul', 'vermelho'], categoria: 'chapéu', quantidade: 2, },
 ];
 const rootElementTest = document.querySelector("#root");
-const searcButtonElementTest = document.querySelector("#search-button");
-const searcInputElementTest = document.querySelector("#input-pesquisar");
-const searcSelectElementTest = document.querySelector("#filter-type-select");
+const searchButtonElementTest = document.querySelector("#search-button");
+const searchInputElementTest = document.querySelector("#input-pesquisar");
+const searchSelectElementTest = document.querySelector("#filter-type-select");
 function renderProduto(itens) {
-    if (rootElement) {
-        rootElement.innerHTML = '';
+    if (rootElementTest) {
+        rootElementTest.innerHTML = '';
         itens.forEach((item) => {
-            rootElement.innerHTML += `
+            rootElementTest.innerHTML += `
                 <div class="item-wrapper">
                     <h2>${item.modelo}</h2>
                     <h3>${item.preco}</h3>
@@ -66,14 +66,14 @@ function renderProduto(itens) {
     }
 }
 function searchProduto() {
-    const searchInputValue = searcInputElement.value;
-    const filterTypeValue = searcSelectElement.value;
+    const searchInputValue = searchInputElementTest.value;
+    const filterTypeValue = searchSelectElementTest.value;
     // const filterTypeValue2 = (searcSelectElement as HTMLSelectElement).value as keyof Omit<Produto, 'id' | 'preco'>;
     const newProdutos = produtos1.filter((produto) => produto[filterTypeValue].includes(searchInputValue));
     renderProduto(newProdutos);
 }
 function eventListenerHandleTest() {
-    searcButtonElement === null || searcButtonElement === void 0 ? void 0 : searcButtonElement.addEventListener('click', searchProduto);
+    searchButtonElementTest === null || searchButtonElementTest === void 0 ? void 0 : searchButtonElementTest.addEventListener('click', searchProduto);
 }
 renderProduto(produtos1);
 eventListenerHandleTest();
