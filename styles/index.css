@@ -1,37 +1,73 @@
-#root{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 350px);
-    justify-content: center;
-    padding: 56px;
-    gap: 50px;
-    margin: auto;
-    text-align: center;
-}
-
 body{
     margin: 0;
     padding: 0;
-    background: linear-gradient(45deg,#181818, #8758FF, #5CB8E4, #F2F2F2);
-    background-size: 400%, 400%;
-    animation: colors 15s ease infinite;
+    background: linear-gradient(90deg,#000000, #181818, #686868, #181818, #000000);
+    background-size: 500%, 500%;
+    animation: colors 10s ease infinite;
 }
 
 @keyframes colors {
     0% {
-        background-position: 0% 50%;
+        background-position: 0% 100%;
     }
     25% {
         background-position: 50% 50%;
     }
     50% {
-        background-position: 100% 50%;
+        background-position: 100% 0%;
     }
     75% {
         background-position: 50% 50%;
     }
     100% {
-        background-position: 0% 50%;
+        background-position: 0% 100%;
     }
+}
+
+.filter-wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    
+}
+
+.filter-wrapper .home {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 50px;
+}
+.filter-wrapper .search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 50px;
+}
+
+.filter-wrapper .home > button, .filter-wrapper .search > button{
+    border: none;
+    border-radius: 8px;
+    justify-content: flex-start;
+    background: rgba(150, 150, 250, 0.3);
+    width: 50px;
+    height: 50px;
+}
+
+.filter-wrapper .search > button:hover{
+    background-color: rgb(0, 255, 255);
+    transition: all .5s;
+}
+
+.filter-wrapper .search > input, .filter-wrapper .search > select{
+    border-radius: 8px;
+    width: 200px;
+    height: 24px;
+
 }
 
 .item-wrapper{
@@ -48,39 +84,24 @@ body{
 }
 
 .item-wrapper > h3{
-    color: white;
+    color: #181818;
 }
+
+.item-wrapper .gender{
+    display: flex;
+}
+
 .item-wrapper:hover{
     background-color: rgb(0, 255, 255);
     transition: all 1.5s;
 }
 
-.filter-wrapper{
-    display: flex;
+#root{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 350px);
     justify-content: center;
-    gap: 20px;
-    align-items: center;
-    height: 50px;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    position: fixed;
-}
-
-.filter-wrapper > button{
-    border: none;
-    background: rgb(173, 216, 216);
-    color: gray;
-    border-radius: 8px;
-    width: 80px;
-    height: 24px;
-}
-.filter-wrapper > button:hover{
-    background-color: rgb(0, 255, 255);
-    transition: all .5s;
-}
-
-.filter-wrapper > input, .filter-wrapper > select{
-    border-radius: 8px;
-    width: 200px;
-    height: 24px;
+    padding: 56px;
+    gap: 50px;
+    margin: auto;
+    text-align: center;
 }
