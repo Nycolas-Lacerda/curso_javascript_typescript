@@ -56,15 +56,15 @@ const produtos2 = [
 ];
 
 const rootElementTest = document.querySelector("#root");
-const searcButtonElementTest = document.querySelector("#search-button");
-const searcInputElementTest = document.querySelector("#input-pesquisar");
-const searcSelectElementTest = document.querySelector("#filter-type-select");
+const searchButtonElementTest = document.querySelector("#search-button");
+const searchInputElementTest = document.querySelector("#input-pesquisar");
+const searchSelectElementTest = document.querySelector("#filter-type-select");
 
 function renderProduto(itens: Produto[]){
-    if(rootElement){   
-        rootElement.innerHTML = '';    
+    if(rootElementTest){   
+        rootElementTest.innerHTML = '';    
         itens.forEach((item) => {
-            rootElement.innerHTML += `
+            rootElementTest.innerHTML += `
                 <div class="item-wrapper">
                     <h2>${item.modelo}</h2>
                     <h3>${item.preco}</h3>
@@ -76,8 +76,8 @@ function renderProduto(itens: Produto[]){
 }
 
 function searchProduto(){
-    const searchInputValue = (searcInputElement as HTMLInputElement).value;
-    const filterTypeValue = (searcSelectElement as HTMLSelectElement).value as keyof Pick<Produto, 'marca' | 'modelo'>;
+    const searchInputValue = (searchInputElementTest as HTMLInputElement).value;
+    const filterTypeValue = (searchSelectElementTest as HTMLSelectElement).value as keyof Pick<Produto, 'marca' | 'modelo'>;
     // const filterTypeValue2 = (searcSelectElement as HTMLSelectElement).value as keyof Omit<Produto, 'id' | 'preco'>;
 
     const newProdutos = produtos1.filter((produto) => produto[filterTypeValue].includes(searchInputValue));
@@ -85,7 +85,7 @@ function searchProduto(){
 }
 
 function eventListenerHandleTest(){
-    (searcButtonElement as HTMLButtonElement)?.addEventListener('click',searchProduto)
+    (searchButtonElementTest as HTMLButtonElement)?.addEventListener('click',searchProduto)
 }
 
 renderProduto(produtos1);

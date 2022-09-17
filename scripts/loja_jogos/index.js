@@ -83,6 +83,7 @@ function render(itens) {
         itens.forEach((item) => {
             rootElement.innerHTML += `
                 <div class="item-wrapper">
+                    <h3>${item.nome}</h3>
                     <img src="${item.img}" width="100%" height="125px" alt="${item.nome}" title="${item.nome}" >
                     <h3>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.preco)}</h3>
                 </div>
