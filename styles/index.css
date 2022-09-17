@@ -1,8 +1,9 @@
 #root{
     display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-columns: repeat(auto-fill, 350px);
+    justify-content: center;
     padding: 56px;
-    gap: 12px;
+    gap: 50px;
     margin: auto;
     text-align: center;
 }
@@ -10,23 +11,48 @@
 body{
     margin: 0;
     padding: 0;
+    background: linear-gradient(45deg,#181818, #8758FF, #5CB8E4, #F2F2F2);
+    background-size: 400%, 400%;
+    animation: colors 15s ease infinite;
+}
+
+@keyframes colors {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 50% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .item-wrapper{
-    background-color: rgb(0, 255, 255);
-    width: 250px;
-    height: 300px;
+    background-color: rgb(173, 216, 216);
+    width: 350px;
+    height: 250px;
     display: flex;
     justify-content: center;
     padding: 10px 0px;
     flex-direction: column;
     align-items: center;
     border-radius: 8px;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
 }
 
-.item-wrapper:hover {
-    transform: rotate3d("45deg");
-    transition: all 5s;
+.item-wrapper > h3{
+    color: white;
+}
+.item-wrapper:hover{
+    background-color: rgb(0, 255, 255);
+    transition: all 1.5s;
 }
 
 .filter-wrapper{
@@ -36,15 +62,25 @@ body{
     align-items: center;
     height: 50px;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
 }
 
 .filter-wrapper > button{
     border: none;
-    background: rgb(112, 61, 116);
-    color: white;
+    background: rgb(173, 216, 216);
+    color: gray;
     border-radius: 8px;
     width: 80px;
+    height: 24px;
+}
+.filter-wrapper > button:hover{
+    background-color: rgb(0, 255, 255);
+    transition: all .5s;
+}
+
+.filter-wrapper > input, .filter-wrapper > select{
+    border-radius: 8px;
+    width: 200px;
     height: 24px;
 }
