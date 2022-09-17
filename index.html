@@ -9,12 +9,21 @@
     </head>
     <body>
         <div class="filter-wrapper" >
-            <input placeholder="Pesquisar" id="input-pesquisar">
-            <select id="filter-type-select">
-                <option value="nome" selected>nome</option>
-                <option value="preco">preco</option>
-            </select>
-            <button id="search-button"> Busca </button>
+            <div class="home" >
+                <button id="home-button">
+                    <img src="./img/icons/home.png" alt="Ícone de casa" title="Voltar ao inicio" width="100%">
+                </button>
+            </div>
+            <div class="search">
+                <input placeholder="Pesquisar" id="input-pesquisar">
+                <select id="filter-type-select">
+                    <option value="nome" selected>Nome</option>
+                    <option value="generos">Generos</option>
+                </select>
+                <button id="search-button"> 
+                    <img src="./img/icons/lupa.png" alt="Pesquisar" width="100%" title="Pesquisar" > 
+                </button>
+            </div>
         </div>
 
         <div id="root"> </div>
