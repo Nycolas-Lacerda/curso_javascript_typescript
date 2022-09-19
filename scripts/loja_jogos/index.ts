@@ -104,9 +104,7 @@ const searchSelectElement = document.querySelector("#filter-type-select");
 function render(itens: Jogo[]){
     if(rootElement){   
         rootElement.innerHTML = '';    
-        itens.forEach((item) => {
-
-            
+        itens.forEach((item) => {          
             rootElement.innerHTML += `
                 <div class="item-wrapper">
                     <h3>${item.nome}</h3>
@@ -126,18 +124,17 @@ function search(){
     const filterTypeValue = (searchSelectElement as HTMLSelectElement).value as keyof Pick<Jogo, 'nome' | 'generos'>;
     // const filterTypeValue2 = (searchSelectElement as HTMLSelectElement).value as keyof Omit<Jogo, 'id' | 'preco'>;
     let newJogos: Jogo[] = [];
+    let generos: string[] = [];
     if(filterTypeValue === 'nome'){
         newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputValue.toLowerCase()));
     }
     if(filterTypeValue === 'generos'){
         newJogos = jogos.filter((jogo) => {
-            return jogo[filterTypeValue].filter((genero) => {
-                console.log(genero.toLowerCase().includes(searchInputValue.toLowerCase()));
-                
-                return genero.toLowerCase().includes(searchInputValue.toLowerCase());
-                
+            generos = jogo[filterTypeValue].map((genero) => {
+                    return genero.toLowerCase();
             });
-        });
+            return generos.includes(searchInputValue.toLowerCase());
+        });        
     }
     // const newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputValue.toLowerCase()));
     render(newJogos);

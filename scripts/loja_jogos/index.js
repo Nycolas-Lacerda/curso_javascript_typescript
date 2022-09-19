@@ -112,15 +112,16 @@ function search() {
     const filterTypeValue = searchSelectElement.value;
     // const filterTypeValue2 = (searchSelectElement as HTMLSelectElement).value as keyof Omit<Jogo, 'id' | 'preco'>;
     let newJogos = [];
+    let generos = [];
     if (filterTypeValue === 'nome') {
         newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputValue.toLowerCase()));
     }
     if (filterTypeValue === 'generos') {
         newJogos = jogos.filter((jogo) => {
-            return jogo[filterTypeValue].filter((genero) => {
-                console.log(genero.toLowerCase().includes(searchInputValue.toLowerCase()));
-                return genero.toLowerCase().includes(searchInputValue.toLowerCase());
+            generos = jogo[filterTypeValue].map((genero) => {
+                return genero.toLowerCase();
             });
+            return generos.includes(searchInputValue.toLowerCase());
         });
     }
     // const newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputValue.toLowerCase()));
