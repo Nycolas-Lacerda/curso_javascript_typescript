@@ -88,43 +88,66 @@ const jogos = [
 const rootElement = document.querySelector("#root");
 const searchButtonElement = document.querySelector("#search-button");
 const homeButtonElement = document.querySelector("#home-button");
-const searchInputElement = document.querySelector("#input-pesquisar");
 const searchSelectElement = document.querySelector("#filter-type-select");
+const inputValueMinElement = document.querySelector("#input-pesquisar-valor-min");
+const inputValueMaxElement = document.querySelector("#input-pesquisar-valor-max");
+const inputTextElement = document.querySelector("#input-pesquisar-text");
 function render(itens) {
     if (rootElement) {
         rootElement.innerHTML = '';
         itens.forEach((item) => {
             rootElement.innerHTML += `
                 <div class="item-wrapper">
-                    <h3>${item.nome}</h3>
-                    <img src="${item.img}" width="100%" height="125px" alt="${item.nome}" title="${item.nome}" >
-                    <h3>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.preco)}</h3>
-                    <div class="genders">
-                        <p>${item.generos.join(', ')}</p>
+                    <div class="item-wrapper-name">
+                        <h3 class="main-text-lg">${item.nome}</h3>
                     </div>
-                </div>
+                    <img src="${item.img}" width="100%" heigth="415px" alt="${item.nome}" title="${item.nome}" >
+                    <div"item-wrapper-value">
+                        <h3 class="main-text-lg">${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.preco)}</h3>
+                        <div>
+                            <p class="main-text-sm" >${item.generos.join(', ')}</p>
+                        </div>
+                    </div>
+                </>
             `;
         });
     }
+    window.scrollTo({ top: 0, behavior: "smooth" });
 }
 function search() {
-    const searchInputValue = searchInputElement.value;
+    const searchInputText = inputTextElement.value;
+    const searchInputValueMin = inputValueMinElement.value;
+    const searchInputValueMax = inputValueMaxElement.value;
     const filterTypeValue = searchSelectElement.value;
     // const filterTypeValue2 = (searchSelectElement as HTMLSelectElement).value as keyof Omit<Jogo, 'id' | 'preco'>;
     let newJogos = [];
     let generos = [];
     if (filterTypeValue === 'nome') {
-        newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputValue.toLowerCase()));
+        newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputText.toLowerCase()));
     }
     if (filterTypeValue === 'generos') {
         newJogos = jogos.filter((jogo) => {
             generos = jogo[filterTypeValue].map((genero) => {
                 return genero.toLowerCase();
             });
-            return generos.includes(searchInputValue.toLowerCase());
+            return generos.includes(searchInputText.toLowerCase());
         });
     }
-    // const newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputValue.toLowerCase()));
+    if (filterTypeValue === 'preco') {
+        console.log(searchInputValueMin, searchInputValueMax);
+        newJogos = jogos.filter((jogo) => {
+            if (searchInputValueMin && searchInputValueMax) {
+                return jogo.preco >= Number.parseFloat(searchInputValueMin) && jogo.preco <= Number.parseFloat(searchInputValueMin);
+            }
+            if (searchInputValueMin && !searchInputValueMax) {
+                return jogo.preco >= Number.parseFloat(searchInputValueMin);
+            }
+            if (!searchInputValueMin && searchInputValueMax) {
+                return jogo.preco <= Number.parseFloat(searchInputValueMin);
+            }
+        });
+    }
+    // const newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputText.toLowerCase()));
     render(newJogos);
 }
 function reset() {
@@ -133,6 +156,9 @@ function reset() {
 function eventListenerHandle() {
     searchButtonElement === null || searchButtonElement === void 0 ? void 0 : searchButtonElement.addEventListener('click', search);
     homeButtonElement === null || homeButtonElement === void 0 ? void 0 : homeButtonElement.addEventListener('click', reset);
+    inputValueMinElement === null || inputValueMinElement === void 0 ? void 0 : inputValueMinElement.addEventListener('input', search);
+    inputValueMaxElement === null || inputValueMaxElement === void 0 ? void 0 : inputValueMaxElement.addEventListener('input', search);
+    inputTextElement === null || inputTextElement === void 0 ? void 0 : inputTextElement.addEventListener('input', search);
 }
 render(jogos);
 eventListenerHandle();

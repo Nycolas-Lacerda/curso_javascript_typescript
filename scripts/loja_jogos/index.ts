@@ -97,8 +97,10 @@ const jogos = [
 const rootElement = document.querySelector("#root");
 const searchButtonElement = document.querySelector("#search-button");
 const homeButtonElement = document.querySelector("#home-button");
-const searchInputElement = document.querySelector("#input-pesquisar");
 const searchSelectElement = document.querySelector("#filter-type-select");
+const inputValueMinElement = document.querySelector("#input-pesquisar-valor-min");
+const inputValueMaxElement = document.querySelector("#input-pesquisar-valor-max");
+const inputTextElement = document.querySelector("#input-pesquisar-text");
 
 
 function render(itens: Jogo[]){
@@ -107,36 +109,59 @@ function render(itens: Jogo[]){
         itens.forEach((item) => {          
             rootElement.innerHTML += `
                 <div class="item-wrapper">
-                    <h3>${item.nome}</h3>
-                    <img src="${item.img}" width="100%" height="125px" alt="${item.nome}" title="${item.nome}" >
-                    <h3>${new Intl.NumberFormat('pt-BR',  { style: 'currency', currency: 'BRL' }).format(item.preco)}</h3>
-                    <div class="genders">
-                        <p>${item.generos.join(', ')}</p>
+                    <div class="item-wrapper-name">
+                        <h3 class="main-text-lg">${item.nome}</h3>
                     </div>
-                </div>
+                    <img src="${item.img}" width="100%" heigth="415px" alt="${item.nome}" title="${item.nome}" >
+                    <div"item-wrapper-value">
+                        <h3 class="main-text-lg">${new Intl.NumberFormat('pt-BR',  { style: 'currency', currency: 'BRL' }).format(item.preco)}</h3>
+                        <div>
+                            <p class="main-text-sm" >${item.generos.join(', ')}</p>
+                        </div>
+                    </div>
+                </>
             `;
         });
     }
+    window.scrollTo({top: 0, behavior: "smooth"});
 }
 
 function search(){
-    const searchInputValue = (searchInputElement as HTMLInputElement).value;
-    const filterTypeValue = (searchSelectElement as HTMLSelectElement).value as keyof Pick<Jogo, 'nome' | 'generos'>;
+    const searchInputText = (inputTextElement as HTMLInputElement).value;
+    const searchInputValueMin = (inputValueMinElement as HTMLInputElement).value;
+    const searchInputValueMax = (inputValueMaxElement as HTMLInputElement).value;
+    const filterTypeValue = (searchSelectElement as HTMLSelectElement).value as keyof Pick<Jogo, 'nome' | 'generos' | 'preco'>;
     // const filterTypeValue2 = (searchSelectElement as HTMLSelectElement).value as keyof Omit<Jogo, 'id' | 'preco'>;
     let newJogos: Jogo[] = [];
     let generos: string[] = [];
+    
     if(filterTypeValue === 'nome'){
-        newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputValue.toLowerCase()));
+        newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputText.toLowerCase()));
     }
     if(filterTypeValue === 'generos'){
         newJogos = jogos.filter((jogo) => {
             generos = jogo[filterTypeValue].map((genero) => {
-                    return genero.toLowerCase();
+                return genero.toLowerCase();
             });
-            return generos.includes(searchInputValue.toLowerCase());
+            return generos.includes(searchInputText.toLowerCase());
         });        
     }
-    // const newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputValue.toLowerCase()));
+    if(filterTypeValue === 'preco'){
+        console.log(searchInputValueMin, searchInputValueMax);
+        
+        newJogos = jogos.filter((jogo) => {
+            if(searchInputValueMin && searchInputValueMax){
+                return jogo.preco >= Number.parseFloat(searchInputValueMin) && jogo.preco <= Number.parseFloat(searchInputValueMin);
+            }
+            if(searchInputValueMin && !searchInputValueMax){
+                return jogo.preco >= Number.parseFloat(searchInputValueMin);
+            }
+            if(!searchInputValueMin && searchInputValueMax){
+                return jogo.preco <= Number.parseFloat(searchInputValueMin);
+            }
+        });
+    }
+    // const newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputText.toLowerCase()));
     render(newJogos);
 }
 
@@ -144,9 +169,13 @@ function reset(){
     render(jogos);
 }
 
+
 function eventListenerHandle(){
-    (searchButtonElement as HTMLButtonElement)?.addEventListener('click',search);
-    (homeButtonElement as HTMLDivElement)?.addEventListener('click',reset);
+    (searchButtonElement as HTMLButtonElement)?.addEventListener('click', search);
+    (homeButtonElement as HTMLDivElement)?.addEventListener('click', reset);
+    (inputValueMinElement as HTMLInputElement)?.addEventListener('input', search);
+    (inputValueMaxElement as HTMLInputElement)?.addEventListener('input', search);
+    (inputTextElement as HTMLInputElement)?.addEventListener('input', search);
 }
 
 render(jogos);
