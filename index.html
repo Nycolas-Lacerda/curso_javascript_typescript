@@ -8,25 +8,29 @@
         <title>Document</title>
     </head>
     <body>
-        <div class="filter-wrapper" >
-            <div class="home" >
-                <button id="home-button">
-                    <img src="./img/icons/home.png" alt="Ícone de casa" title="Voltar ao inicio" width="100%">
-                </button>
+        <header>
+            <div class="header-filter-wrapper" >
+                <div class="home" >
+                    <button id="home-button">
+                        <img src="./img/icons/home.png" alt="Ícone de casa" title="Voltar ao inicio" width="100%">
+                    </button>
+                </div>
+                <div class="search">
+                    <input type="text" id="input-pesquisar-valor-min" class="header-input-value" placeholder="R$ 0,00">
+                    <input type="text" id="input-pesquisar-valor-max" class="header-input-value" placeholder="R$ 0,00">
+                    <input type="text" placeholder="Pesquisar" id="input-pesquisar-text">
+                    <select id="filter-type-select">
+                        <option value="nome" selected>Nome</option>
+                        <option value="generos">Generos</option>
+                    </select>
+                    <button id="search-button"> 
+                        <img src="./img/icons/lupa.png" alt="Pesquisar" width="100%" title="Pesquisar" > 
+                    </button>
+                </div>
             </div>
-            <div class="search">
-                <input placeholder="Pesquisar" id="input-pesquisar">
-                <select id="filter-type-select">
-                    <option value="nome" selected>Nome</option>
-                    <option value="generos">Generos</option>
-                </select>
-                <button id="search-button"> 
-                    <img src="./img/icons/lupa.png" alt="Pesquisar" width="100%" title="Pesquisar" > 
-                </button>
-            </div>
-        </div>
+        </header>
+        <main id="root" class="main"> </main>
 
-        <div id="root"> </div>
         <!-- <script src="./scripts/index.js"></script> -->
         <!-- <script src="./scripts/exercicio_aula_1/index.js"></script> -->
         <!-- <script src="./scripts/exercicio_aula_2/index.js"></script> -->
