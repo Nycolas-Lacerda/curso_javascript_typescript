@@ -6,7 +6,7 @@ type Jogo = {
     generos: string[];
 }
 
-const jogos = [
+const JOGOS = [
         {
             id: 1,
             nome: "Bloodborne",
@@ -109,17 +109,21 @@ function render(itens: Jogo[]){
         itens.forEach((item) => {          
             rootElement.innerHTML += `
                 <div class="item-wrapper">
-                    <div class="item-wrapper-name">
-                        <h3 class="main-text-lg">${item.nome}</h3>
+                    <div class="box-front-img">
+                        <img src="${item.img}" width="100%" heigth="415px" alt="${item.nome}" title="${item.nome}" >
                     </div>
-                    <img src="${item.img}" width="100%" heigth="415px" alt="${item.nome}" title="${item.nome}" >
-                    <div"item-wrapper-value">
-                        <h3 class="main-text-lg">${new Intl.NumberFormat('pt-BR',  { style: 'currency', currency: 'BRL' }).format(item.preco)}</h3>
-                        <div>
-                            <p class="main-text-sm" >${item.generos.join(', ')}</p>
+                    <div class="box-back-info">
+                        <div class="item-wrapper-name">
+                            <h3 class="main-text-lg">${item.nome}</h3>
+                        </div>
+                        <div"item-wrapper-value">
+                            <h3 class="main-text-lg">${new Intl.NumberFormat('pt-BR',  { style: 'currency', currency: 'BRL' }).format(item.preco)}</h3>
+                            <div>
+                                <p class="main-text-sm" >${item.generos.join(', ')}</p>
+                            </div>
                         </div>
                     </div>
-                </>
+                </div>
             `;
         });
     }
@@ -136,10 +140,10 @@ function search(){
     let generos: string[] = [];
     
     if(filterTypeValue === 'nome'){
-        newJogos = jogos.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputText.toLowerCase()));
+        newJogos = JOGOS.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputText.toLowerCase()));
     }
     if(filterTypeValue === 'generos'){
-        newJogos = jogos.filter((jogo) => {
+        newJogos = JOGOS.filter((jogo) => {
             generos = jogo[filterTypeValue].map((genero) => {
                 return genero.toLowerCase();
             });
@@ -149,7 +153,7 @@ function search(){
     if(filterTypeValue === 'preco'){
         console.log(searchInputValueMin, searchInputValueMax);
         
-        newJogos = jogos.filter((jogo) => {
+        newJogos = JOGOS.filter((jogo) => {
             if(searchInputValueMin && searchInputValueMax){
                 return jogo.preco >= Number.parseFloat(searchInputValueMin) && jogo.preco <= Number.parseFloat(searchInputValueMin);
             }
@@ -166,7 +170,7 @@ function search(){
 }
 
 function reset(){
-    render(jogos);
+    render(JOGOS);
 }
 
 
@@ -178,5 +182,5 @@ function eventListenerHandle(){
     (inputTextElement as HTMLInputElement)?.addEventListener('input', search);
 }
 
-render(jogos);
+render(JOGOS);
 eventListenerHandle();
