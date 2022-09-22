@@ -94,7 +94,19 @@ const JOGOS = [
         },
 ];
 
-const rootElement = document.querySelector("#root");
+const GENEROS = [
+    'Ação',
+    'Atmosférico',
+    'Aventura',
+    'Fantasia Sombria',
+    'Hack and Slash',
+    'Mundo Aberto', 
+    'Soulslike', 
+    'RPG', 
+]
+
+const rootElement = document.querySelector("#itens");
+const menuElement = document.querySelector("#menu");
 const searchButtonElement = document.querySelector("#search-button");
 const homeButtonElement = document.querySelector("#home-button");
 const searchSelectElement = document.querySelector("#filter-type-select");
@@ -110,7 +122,7 @@ function render(itens: Jogo[]){
             rootElement.innerHTML += `
                 <div class="item-wrapper">
                     <div class="box-front-img">
-                        <img src="${item.img}" width="100%" heigth="415px" alt="${item.nome}" title="${item.nome}" >
+                        <img src="${item.img}" width="100%" heigth="415px" alt="${item.nome}" title="${item.nome}" />
                     </div>
                     <div class="box-back-info">
                         <div class="item-wrapper-name">
@@ -128,6 +140,19 @@ function render(itens: Jogo[]){
         });
     }
     window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+function renderMenu(itens: string[]){
+    if(menuElement){
+        itens.forEach((item) => {            
+            menuElement.innerHTML += `
+                <div class="lateral-menu-wrapper">
+                    <input type="checkbox" id="${item.toLowerCase()}" name="${item.toLowerCase()}">
+                    <label for="${item.toLowerCase()}" class="main-text-sm">${item}</label>
+                </div>
+            `;   
+        })
+    }
 }
 
 function search(){
@@ -182,5 +207,8 @@ function eventListenerHandle(){
     (inputTextElement as HTMLInputElement)?.addEventListener('input', search);
 }
 
+renderMenu(GENEROS);
+
 render(JOGOS);
+
 eventListenerHandle();

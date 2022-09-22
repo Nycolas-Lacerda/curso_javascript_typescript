@@ -16,8 +16,6 @@
                     </button>
                 </div>
                 <div class="search">
-                    <input type="text" id="input-pesquisar-valor-min" class="header-input-value" placeholder="R$ 0,00">
-                    <input type="text" id="input-pesquisar-valor-max" class="header-input-value" placeholder="R$ 0,00">
                     <input type="text" placeholder="Pesquisar" id="input-pesquisar-text">
                     <select id="filter-type-select">
                         <option value="nome" selected>Nome</option>
@@ -30,8 +28,16 @@
             </div>
         </header>
 
-        <main id="root" class="main"> </main>
-
+        <main id="root" class="main">
+            <div id="menu" class="lateral-menu">
+                <label for="input-pesquisar-valor-min" class="main-text-sm">Preço Mínimo</label>
+                <input type="text" id="input-pesquisar-valor-min" class="header-input-value" placeholder="R$ 0,00">
+                <label for="input-pesquisar-valor-max" class="main-text-sm">Preço Máximo</label>
+                <input type="text" name="input-pesquisar-valor-max" id="input-pesquisar-valor-max" class="header-input-value" placeholder="R$ 0,00">    
+            </div>    
+            <div class="itens-container" id="itens"> </div>
+        </main>
+        
         <!-- <script src="./scripts/index.js"></script> -->
         <!-- <script src="./scripts/exercicio_aula_1/index.js"></script> -->
         <!-- <script src="./scripts/exercicio_aula_2/index.js"></script> -->
