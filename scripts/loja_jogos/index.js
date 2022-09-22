@@ -85,7 +85,18 @@ const JOGOS = [
         generos: ['RPG', 'Mundo Aberto', 'Ação'],
     },
 ];
-const rootElement = document.querySelector("#root");
+const GENEROS = [
+    'Ação',
+    'Atmosférico',
+    'Aventura',
+    'Fantasia Sombria',
+    'Hack and Slash',
+    'Mundo Aberto',
+    'Soulslike',
+    'RPG',
+];
+const rootElement = document.querySelector("#itens");
+const menuElement = document.querySelector("#menu");
 const searchButtonElement = document.querySelector("#search-button");
 const homeButtonElement = document.querySelector("#home-button");
 const searchSelectElement = document.querySelector("#filter-type-select");
@@ -99,7 +110,7 @@ function render(itens) {
             rootElement.innerHTML += `
                 <div class="item-wrapper">
                     <div class="box-front-img">
-                        <img src="${item.img}" width="100%" heigth="415px" alt="${item.nome}" title="${item.nome}" >
+                        <img src="${item.img}" width="100%" heigth="415px" alt="${item.nome}" title="${item.nome}" />
                     </div>
                     <div class="box-back-info">
                         <div class="item-wrapper-name">
@@ -117,6 +128,18 @@ function render(itens) {
         });
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function renderMenu(itens) {
+    if (menuElement) {
+        itens.forEach((item) => {
+            menuElement.innerHTML += `
+                <div class="lateral-menu-wrapper">
+                    <input type="checkbox" id="${item.toLowerCase()}" name="${item.toLowerCase()}">
+                    <label for="${item.toLowerCase()}" class="main-text-sm">${item}</label>
+                </div>
+            `;
+        });
+    }
 }
 function search() {
     const searchInputText = inputTextElement.value;
@@ -164,5 +187,6 @@ function eventListenerHandle() {
     inputValueMaxElement === null || inputValueMaxElement === void 0 ? void 0 : inputValueMaxElement.addEventListener('input', search);
     inputTextElement === null || inputTextElement === void 0 ? void 0 : inputTextElement.addEventListener('input', search);
 }
+renderMenu(GENEROS);
 render(JOGOS);
 eventListenerHandle();
