@@ -106,13 +106,14 @@ const GENEROS = [
 ]
 
 const rootElement = document.querySelector("#itens");
-const menuElement = document.querySelector("#menu");
+const menuGroupElement = document.querySelector("#group-checkbox");
 const searchButtonElement = document.querySelector("#search-button");
 const homeButtonElement = document.querySelector("#home-button");
-const searchSelectElement = document.querySelector("#filter-type-select");
 const inputValueMinElement = document.querySelector("#input-pesquisar-valor-min");
 const inputValueMaxElement = document.querySelector("#input-pesquisar-valor-max");
 const inputTextElement = document.querySelector("#input-pesquisar-text");
+const checkboxElement = Array.from(document.querySelectorAll("input[type=checkbox]"));
+console.log(checkboxElement);
 
 
 function render(itens: Jogo[]){
@@ -143,50 +144,47 @@ function render(itens: Jogo[]){
 }
 
 function renderMenu(itens: string[]){
-    if(menuElement){
-        itens.forEach((item) => {            
-            menuElement.innerHTML += `
-                <div class="lateral-menu-wrapper">
-                    <input type="checkbox" id="${item.toLowerCase()}" name="${item.toLowerCase()}">
-                    <label for="${item.toLowerCase()}" class="main-text-sm">${item}</label>
+    let id;
+    if(menuGroupElement){
+        itens.forEach((item) => {    
+            menuGroupElement.innerHTML += `
+                <div id="unit-checkbox" class="lateral-menu-wrapper">
+                    <input type="checkbox" id="${item.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")}" name="${item.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")}">
+                    <label for="${item.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")}" class="main-text-sm-white">${item}</label>
                 </div>
             `;   
         })
     }
 }
 
-function search(){
-    const searchInputText = (inputTextElement as HTMLInputElement).value;
+function searchPrice(){
     const searchInputValueMin = (inputValueMinElement as HTMLInputElement).value;
     const searchInputValueMax = (inputValueMaxElement as HTMLInputElement).value;
-    const filterTypeValue = (searchSelectElement as HTMLSelectElement).value as keyof Pick<Jogo, 'nome' | 'generos' | 'preco'>;
-    // const filterTypeValue2 = (searchSelectElement as HTMLSelectElement).value as keyof Omit<Jogo, 'id' | 'preco'>;
-    let newJogos: Jogo[] = [];
+    let newJogos: Jogo[] = JOGOS;
     let generos: string[] = [];
-    
-    if(filterTypeValue === 'nome'){
-        newJogos = JOGOS.filter((jogo) => jogo[filterTypeValue].toLowerCase().includes(searchInputText.toLowerCase()));
-    }
-    if(filterTypeValue === 'generos'){
-        newJogos = JOGOS.filter((jogo) => {
-            generos = jogo[filterTypeValue].map((genero) => {
-                return genero.toLowerCase();
-            });
-            return generos.includes(searchInputText.toLowerCase());
-        });        
-    }
-    if(filterTypeValue === 'preco'){
-        console.log(searchInputValueMin, searchInputValueMax);
-        
+
+    // if(filterTypeValue === 'generos'){
+    //     newJogos = JOGOS.filter((jogo) => {
+    //         generos = jogo['generos'].map((genero) => {
+    //             return genero.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "");
+    //         });
+    //         return generos.includes(searchInputText.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, ""));
+    //     });        
+    // }
+    if(searchInputValueMin !== '' || searchInputValueMax !== ''){
         newJogos = JOGOS.filter((jogo) => {
             if(searchInputValueMin && searchInputValueMax){
-                return jogo.preco >= Number.parseFloat(searchInputValueMin) && jogo.preco <= Number.parseFloat(searchInputValueMin);
+                // console.log(searchInputValueMin, searchInputValueMin);
+                
+                if(jogo.preco >= Number.parseFloat(searchInputValueMin) && jogo.preco <= Number.parseFloat(searchInputValueMax)){
+                    return true;
+                }
             }
             if(searchInputValueMin && !searchInputValueMax){
                 return jogo.preco >= Number.parseFloat(searchInputValueMin);
             }
             if(!searchInputValueMin && searchInputValueMax){
-                return jogo.preco <= Number.parseFloat(searchInputValueMin);
+                return jogo.preco <= Number.parseFloat(searchInputValueMax);
             }
         });
     }
@@ -194,17 +192,57 @@ function search(){
     render(newJogos);
 }
 
+function searchName(){
+    const searchInputText = (inputTextElement as HTMLInputElement).value;
+    let newJogos: Jogo[] = JOGOS;
+
+    if(searchInputText !== ''){
+        newJogos = JOGOS.filter((jogo) => {
+            return jogo['nome'].toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "").includes(searchInputText.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, ""))
+        });
+    }
+    render(newJogos);
+}
+function searchGender(){
+    const searchInputText = (inputTextElement as HTMLInputElement).value;
+    let newJogos: Jogo[] = JOGOS;
+
+    if(searchInputText !== ''){
+        newJogos = JOGOS.filter((jogo) => {
+            return jogo['nome'].toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "").includes(searchInputText.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, ""))
+        });
+    }
+    render(newJogos);
+}
+
+function search(){
+    searchName();
+    searchPrice();
+    searchGender();
+}
 function reset(){
+    const inputValueMinElement = document.querySelector("#input-pesquisar-valor-min");
+    const inputValueMaxElement = document.querySelector("#input-pesquisar-valor-max");
+    const inputTextElement = document.querySelector("#input-pesquisar-text");
+    (inputValueMinElement as HTMLInputElement)?.setAttribute('value', '1');
+    (inputValueMaxElement as HTMLInputElement)?.setAttribute('value', '400');
+    (inputTextElement as HTMLInputElement)?.setAttribute('value', '');
     render(JOGOS);
 }
+
 
 
 function eventListenerHandle(){
     (searchButtonElement as HTMLButtonElement)?.addEventListener('click', search);
     (homeButtonElement as HTMLDivElement)?.addEventListener('click', reset);
-    (inputValueMinElement as HTMLInputElement)?.addEventListener('input', search);
-    (inputValueMaxElement as HTMLInputElement)?.addEventListener('input', search);
-    (inputTextElement as HTMLInputElement)?.addEventListener('input', search);
+    (inputValueMinElement as HTMLInputElement)?.addEventListener('input', searchPrice);
+    (inputValueMaxElement as HTMLInputElement)?.addEventListener('input', searchPrice);
+    (inputTextElement as HTMLInputElement)?.addEventListener('input', searchName);
+    
+    (checkboxElement as HTMLInputElement[])?.forEach((e)=>{        
+        console.log(checkboxElement);
+        e.addEventListener('change', searchGender);        
+    });
 }
 
 renderMenu(GENEROS);
