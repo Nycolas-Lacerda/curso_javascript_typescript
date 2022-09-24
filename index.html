@@ -5,6 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./styles/index.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/header-filter.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/lateral-menu.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/itens.css" />
         <title>Document</title>
     </head>
     <body>
@@ -16,11 +19,17 @@
                     </button>
                 </div>
                 <div class="search">
+                    <div class="header-input-range-wrapper">
+                        <div class="header-menu-wrapper">
+                            <label for="input-pesquisar-valor-min" class="main-text-sm-white">Preço Mínimo </label>
+                            <input type="range" name="input-pesquisar-valor-min" id="input-pesquisar-valor-min" class="header-input-value" title="R$ 1,00 até R$ 200,00" min="1" max="200" value="1">
+                        </div>
+                        <div class="header-menu-wrapper">
+                            <label for="input-pesquisar-valor-max" class="main-text-sm-white">Preço Máximo</label>
+                            <input type="range" name="input-pesquisar-valor-max" id="input-pesquisar-valor-max" class="header-input-value" title="R$ 201,00 até R$ 400,00" min="201" max="400" value="400">         
+                        </div>
+                    </div>
                     <input type="text" placeholder="Pesquisar" id="input-pesquisar-text">
-                    <select id="filter-type-select">
-                        <option value="nome" selected>Nome</option>
-                        <option value="generos">Generos</option>
-                    </select>
                     <button id="search-button"> 
                         <img src="./img/icons/lupa.png" alt="Pesquisar" width="100%" title="Pesquisar" > 
                     </button>
@@ -30,11 +39,11 @@
 
         <main id="root" class="main">
             <div id="menu" class="lateral-menu">
-                <label for="input-pesquisar-valor-min" class="main-text-sm">Preço Mínimo</label>
-                <input type="text" id="input-pesquisar-valor-min" class="header-input-value" placeholder="R$ 0,00">
-                <label for="input-pesquisar-valor-max" class="main-text-sm">Preço Máximo</label>
-                <input type="text" name="input-pesquisar-valor-max" id="input-pesquisar-valor-max" class="header-input-value" placeholder="R$ 0,00">    
-            </div>    
+                <div id="group-checkbox" class="group-checkbox">
+                    <label for="group-checkbox" class="main-text-md-white">Gêneros</label>
+                    
+                </div>   
+            </div>   
             <div class="itens-container" id="itens"> </div>
         </main>
         
