@@ -63,17 +63,3 @@ body{
     word-wrap: normal;
     color: aliceblue;
 }
-
-@media screen and (min-width: 320px) and (max-width: 1024px) {
-    .item-wrapper{
-        background-color: rgb(173, 216, 216);
-        width: 250px;
-        display: flex;
-        justify-content: center;
-        padding: 10px 0px;
-        flex-direction: column;
-        align-items: center;
-        border-radius: 8px;
-        box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
-    } 
-}

@@ -20,16 +20,27 @@
                 </div>
                 <div class="search">
                     <div class="header-input-range-wrapper">
-                        <div class="header-menu-wrapper">
-                            <label for="input-pesquisar-valor-min" class="main-text-sm-white">Preço Mínimo </label>
-                            <input type="range" name="input-pesquisar-valor-min" id="input-pesquisar-valor-min" class="header-input-value" title="R$ 1,00 até R$ 200,00" min="1" max="200" value="1">
+                        <div class="header-menu-wrapper" title="R$ 1,00 até R$ 200,00">
+                            <label for="input-search-valor-min" class="main-text-sm-white">Preço Mínimo:</label>
+                            <input type="range" name="input-search-valor-min" id="input-search-valor-min" class="header-input-value" min="1" max="200" value="1">
+                        </div>
+                        <div class="header-menu-wrapper" title="R$ 201,00 até R$ 400,00">
+                            <label for="input-search-valor-max" class="main-text-sm-white">Preço Máximo:</label>
+                            <input type="range" name="input-search-valor-max" id="input-search-valor-max" class="header-input-value" min="201" max="400" value="400">         
                         </div>
                         <div class="header-menu-wrapper">
-                            <label for="input-pesquisar-valor-max" class="main-text-sm-white">Preço Máximo</label>
-                            <input type="range" name="input-pesquisar-valor-max" id="input-pesquisar-valor-max" class="header-input-value" title="R$ 201,00 até R$ 400,00" min="201" max="400" value="400">         
+                            <label for="input-search-text" class="main-text-sm-white">Nome:</label>
+                            <input type="text" placeholder="Pesquisar por nome" id="input-search-text">
+                        </div>
+                        <div class="header-menu-wrapper">
+                            <label for="header-select-filter" class="main-text-sm-white">Pesquisa Por:</label>
+                            <select name="header-filter-buy" id="header-select-filter" class="header-select-filter">
+                                <option value="todos" selected>Todos</option>
+                                <option value="true">Já comprados</option>
+                                <option value="false">Não comprados</option>
+                            </select>
                         </div>
                     </div>
-                    <input type="text" placeholder="Pesquisar" id="input-pesquisar-text">
                     <button id="search-button"> 
                         <img src="./img/icons/lupa.png" alt="Pesquisar" width="100%" title="Pesquisar" > 
                     </button>
