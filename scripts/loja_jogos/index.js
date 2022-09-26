@@ -195,7 +195,6 @@ function searchGender() {
         .map((e) => e.getAttribute('value'));
     let newJogos = [...JOGOS];
     if ((generosChecados).length) {
-        // console.log(JOGOS);
         newJogos = JOGOS.filter((jogo) => {
             return jogo.generos.some((genero) => {
                 return generosChecados.includes(genero.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9]/g, ""));
