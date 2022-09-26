@@ -117,8 +117,6 @@ const inputTextElement = document.querySelector("#input-search-text");
 const selectElement = document.querySelector("#header-select-filter");
 const buyButtonElement = document.querySelector("#buy-button");
 renderMenu(GENEROS);
-const checkboxElement = Array.from(document.querySelectorAll('input[type="checkbox"]'));
-const checkboxCheckedElement = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map((e) => e.getAttribute('id'));
 function render(itens) {
     if (rootElement) {
         rootElement.innerHTML = '';
@@ -156,7 +154,7 @@ function renderMenu(itens) {
         itens.forEach((item) => {
             menuGroupElement.innerHTML += `
                 <div id="unit-checkbox" class="lateral-menu-wrapper">
-                    <input type="checkbox" id="${item.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")}" name="checkbox">
+                    <input type="checkbox" id="${item.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")}" value="${item.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")}" name="checkbox">
                     <label for="${item.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")}" class="main-text-sm-white">${item}</label>
                 </div>
             `;
@@ -166,7 +164,7 @@ function renderMenu(itens) {
 function searchPrice() {
     const searchInputValueMin = inputValueMinElement.value;
     const searchInputValueMax = inputValueMaxElement.value;
-    let newJogos = JOGOS;
+    let newJogos = [...JOGOS];
     if (searchInputValueMin !== '' || searchInputValueMax !== '') {
         newJogos = JOGOS.filter((jogo) => jogo.preco >= Number.parseFloat(searchInputValueMin) && jogo.preco <= Number.parseFloat(searchInputValueMax));
     }
@@ -174,16 +172,16 @@ function searchPrice() {
 }
 function searchName() {
     const searchInputText = inputTextElement.value;
-    let newJogos = JOGOS;
+    let newJogos = [...JOGOS];
     if (searchInputText !== '') {
         newJogos = JOGOS.filter((jogo) => jogo['nome'].toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")
-            .includes(searchInputText.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")));
+            .includes(searchInputText.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9]/g, "")));
     }
     render(newJogos);
 }
 function searchBought() {
     const selectElementSelected = selectElement.value;
-    let newJogos = JOGOS;
+    let newJogos = [...JOGOS];
     let comprado;
     if (selectElementSelected !== 'todos') {
         comprado = selectElementSelected === 'true' ? true : false;
@@ -191,19 +189,20 @@ function searchBought() {
     }
     render(newJogos);
 }
+const checkboxElement = Array.from(document.querySelectorAll('input[type="checkbox"]'));
 function searchGender() {
-    const checkboxElementChecked = (checkboxCheckedElement);
-    let newJogos = JOGOS;
-    if ((checkboxElementChecked).length > 0) {
+    const generosChecados = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+        .map((e) => e.getAttribute('value'));
+    let newJogos = [...JOGOS];
+    if ((generosChecados).length) {
+        // console.log(JOGOS);
         newJogos = JOGOS.filter((jogo) => {
-            return checkboxElementChecked.some((genero) => {
-                console.log(genero);
-                return jogo.generos.indexOf(genero.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9s]/g, "")) >= 0;
+            return jogo.generos.some((genero) => {
+                return generosChecados.includes(genero.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9]/g, ""));
             });
-            // .some(r=> arr2.indexOf(r) >= 0)
         });
-        // console.log(newJogos);
     }
+    // console.log(newJogos);
     render(newJogos);
 }
 function search() {
@@ -215,7 +214,6 @@ function search() {
 //     console.log(buyButtonElement);
 // }
 function reset() {
-    console.log(1);
     render(JOGOS);
 }
 function eventListenerHandle() {
