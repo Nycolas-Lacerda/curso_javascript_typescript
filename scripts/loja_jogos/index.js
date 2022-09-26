@@ -117,6 +117,7 @@ const inputTextElement = document.querySelector("#input-search-text");
 const selectElement = document.querySelector("#header-select-filter");
 const buyButtonElement = document.querySelector("#buy-button");
 renderMenu(GENEROS);
+const checkboxElement = Array.from(document.querySelectorAll('input[type="checkbox"]'));
 function render(itens) {
     if (rootElement) {
         rootElement.innerHTML = '';
@@ -189,7 +190,6 @@ function searchBought() {
     }
     render(newJogos);
 }
-const checkboxElement = Array.from(document.querySelectorAll('input[type="checkbox"]'));
 function searchGender() {
     const generosChecados = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
         .map((e) => e.getAttribute('value'));
@@ -201,7 +201,6 @@ function searchGender() {
             });
         });
     }
-    // console.log(newJogos);
     render(newJogos);
 }
 function search() {
