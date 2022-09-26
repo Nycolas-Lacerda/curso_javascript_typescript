@@ -70,10 +70,10 @@
 
 /* INICIO DO INPUT TYPE RANGE COM PROGRESS BAR */
 .header-input-value {
-	color: rgb(0, 0, 0);
+	color: rgb(255, 255, 255);
 	--thumb-height: 1.125em;
 	--track-height: 0.125em;
-	--track-color: rgba(0, 0, 0, 0.5);
+	--track-color: rgba(255, 255, 255, 0.5);
 	--brightness-hover: 180%;
 	--brightness-down: 80%;
 	--clip-edges: 0.125em;
