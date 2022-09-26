@@ -206,6 +206,7 @@ function searchGender() {
 function search() {
     searchName();
     searchPrice();
+    searchBought();
     searchGender();
 }
 // function setBuy(){
