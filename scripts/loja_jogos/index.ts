@@ -129,6 +129,8 @@ const buyButtonElement = document.querySelector("#buy-button");
 
 renderMenu(GENEROS);
 
+const checkboxElement = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+
 function render(itens: Jogo[]){
     if(rootElement){   
         rootElement.innerHTML = '';    
@@ -208,24 +210,19 @@ function searchBought(){
     render(newJogos);
 }
 
-const checkboxElement = Array.from(document.querySelectorAll('input[type="checkbox"]'));
-
 function searchGender(){
     const generosChecados = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
         .map((e) => e.getAttribute('value'));
 
     let newJogos: Jogo[] = [...JOGOS];
     
-    if((generosChecados).length){
-      // console.log(JOGOS);
-      
+    if((generosChecados).length){      
       newJogos = JOGOS.filter((jogo) => {
             return jogo.generos.some((genero) => {
                 return generosChecados.includes(genero.toLowerCase().normalize('NFD').replace(/[^a-zA-Z0-9]/g, ""));
             );
         });
     }
-    // console.log(newJogos);
     
     render(newJogos);
 }
@@ -243,8 +240,6 @@ function search(){
 function reset(){
     render(JOGOS);
 }
-
-
 
 function eventListenerHandle(){
     (searchButtonElement as HTMLButtonElement)?.addEventListener('click', search);
