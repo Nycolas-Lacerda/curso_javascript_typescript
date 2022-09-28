@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../styles/index.css" />
+        <link rel="stylesheet" type="text/css" href="../../styles/header-filter.css" />
+        <link rel="stylesheet" type="text/css" href="../../styles/lateral-menu.css" />
+        <link rel="stylesheet" type="text/css" href="../../styles/itens.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <div class="header-filter-wrapper" >
+                <div class="home" >
+                    <button id="home-button">
+                        <img src="../../img/icons/home.png" alt="Ícone de casa" title="Voltar ao inicio" width="100%">
+                    </button>
+                </div>
+                <div class="search">
+                    <div class="header-input-range-wrapper">
+                        <div class="header-menu-wrapper" title="R$ 1,00 até R$ 200,00">
+                            <label for="input-search-valor-min" class="main-text-sm-white">Preço Mínimo:</label>
+                            <input type="range" name="input-search-valor-min" id="input-search-valor-min" class="header-input-value" min="1" max="200" value="1">
+                        </div>
+                        <div class="header-menu-wrapper" title="R$ 201,00 até R$ 400,00">
+                            <label for="input-search-valor-max" class="main-text-sm-white">Preço Máximo:</label>
+                            <input type="range" name="input-search-valor-max" id="input-search-valor-max" class="header-input-value" min="201" max="400" value="400">         
+                        </div>
+                        <div class="header-menu-wrapper">
+                            <label for="input-search-text" class="main-text-sm-white">Nome:</label>
+                            <input type="text" placeholder="Pesquisar por nome" id="input-search-text">
+                        </div>
+                        <div class="header-menu-wrapper">
+                            <label for="header-select-filter" class="main-text-sm-white">Pesquisa Por:</label>
+                            <select name="header-filter-buy" id="header-select-filter" class="header-select-filter">
+                                <option value="todos" selected>Todos</option>
+                                <option value="true">Já comprados</option>
+                                <option value="false">Não comprados</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="search-button"> 
+                        <img src="../../img/icons/lupa.png" alt="Pesquisar" width="100%" title="Pesquisar" > 
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main id="root" class="main">
+            <div id="menu" class="lateral-menu">
+                <div id="group-checkbox" class="group-checkbox">
+                    <label for="group-checkbox" class="main-text-md-white">Gêneros</label>
+                    
+                </div>   
+            </div>   
+            <div class="itens-container" id="itens"> </div>
+        </main>
+        
+        <!-- <script src="./scripts/index.js"></script> -->
+        <!-- <script src="./scripts/exercicio_aula_1/index.js"></script> -->
+        <!-- <script src="./scripts/exercicio_aula_2/index.js"></script> -->
+        <!-- <script src="./scripts/exercicio_aula_3/index.js"></script> -->
+        <script src="./index.js"></script>
+    </body>
+</html>
