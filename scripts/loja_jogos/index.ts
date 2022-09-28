@@ -146,7 +146,7 @@ function render(itens: Jogo[]){
                         </div>
                         <div class="buy ${item.comprado === true ? "remove" : "add"}" >
                             <button id="buy-button">
-                                <img src="${item.comprado === false ? "./img/icons/buy.png" : "./img/icons/remove.png"}" width="100%" title="${item.comprado === true ? "Remover compra" : "Comprar Jogo"}" />
+                                <img src="${item.comprado === false ? "../../img/icons/buy.png" : "../../img/icons/remove.png"}" width="100%" title="${item.comprado === true ? "Remover compra" : "Comprar Jogo"}" />
                             </button>
                         </div>
                         <div"item-wrapper-value">
