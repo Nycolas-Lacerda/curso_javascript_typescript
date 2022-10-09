@@ -11,9 +11,8 @@ aside{
 
 #ingrediente-pesquisa{
     height: 24px;
-    padding: 3px;
-    margin-top: 10px;
-    border-radius: 5px;
+    padding-left: 10px;
+    border-radius: 20px;
     box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -24,11 +23,16 @@ aside{
     gap: 10px;
 }
 
-#button-pesquisa-aside {
-    border: solid 1px rgb(150, 50, 250);
+#search-button{
     border-radius: 8px;
     justify-content: flex-start;
-    background: rgba(150, 150, 250, 0.3);
-    width: 50px;
-    height: 50px;
+    border: solid 1px rgba(50, 50, 50, 0.3);
+    background: rgba(150, 150, 150, 0.3);
+    width: 40px;
+    height: 40px;
+}
+
+#search-button:hover{
+    background: rgba(50, 50, 50, 0.7);
+    cursor: pointer;
 }

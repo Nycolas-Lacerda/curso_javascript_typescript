@@ -49,10 +49,6 @@ body {
     padding: 0 10px;
 }
 
-.pagination-button > button:hover{
-    background: rgba(100, 100, 250, 0.7);
-    cursor: pointer;
-}
 
 .pagination-button > button, .pagination-label > div{
     border: none;
@@ -60,9 +56,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(150, 150, 250, 0.7);
+    background: rgba(150, 150, 150, 0.7);
     width: 50px;
     height: 50px;
+}
+
+.pagination-button > button:hover{
+    background: rgba(50, 50, 50, 0.7);
+    cursor: pointer;
 }
 .main-text-lg{
     font-size: 24px;
@@ -98,4 +99,17 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     word-wrap: break-word;
     color: aliceblue;
+}
+
+.right{
+    text-align: right;
+}
+.left{
+    text-align: left;
+}
+.center{
+    text-align: center;
+}
+.justify{
+    text-align: justify;
 }
