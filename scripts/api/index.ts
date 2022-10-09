@@ -22,25 +22,30 @@ const fastForwardButtonElement = document.querySelector("#fast-forward");
 (textPageElement as HTMLParagraphElement).innerText = `${paginaAtual}`;
 
 function quebraPesquisa(pesquisa: string){
-    return pesquisa.trim().split(';');
+    let pesquisaArray: string[];
+    pesquisa = pesquisa.trim();
+    pesquisaArray = pesquisa.split(';');
+
+    return pesquisaArray.map((string) => string.trim());
 }
 
 async function filtrarNome(){
     const nome = (inputNomeElement as HTMLInputElement).value;
-    const filtro = dados.filter((receita) => receita.Name.toLowerCase().includes(nome.toLowerCase()));
+    const filtro = [...dados].filter((receita) => receita.Name.toLowerCase().includes(nome.toLowerCase()));
     renderizarReceitas(filtro);
 }
 
 async function filtrarIngrediente() {
     const ingrediente = (inputIngredienteElement as HTMLInputElement).value;
     const array = quebraPesquisa(ingrediente);
-    console.log(array);
     
-    const filtro = dados.filter((receita) => {
+    const filtro = [...dados].filter((receita) => {
         const buscaIngrediente = receita.Ingredients.filter((ingredienteReceita) => {
             const arrayBusca = array.filter((ingredientePesquisa) => {
                 return ingredienteReceita.toLowerCase().includes(ingredientePesquisa.toLowerCase());
             });
+            console.log(arrayBusca, array);
+            
             if(arrayBusca.length === array.length){
                 return receita;
             }
@@ -51,19 +56,6 @@ async function filtrarIngrediente() {
             return receita;
         }
     }); 
-    // const filtro = dados.filter((receita) => {
-
-    //     const buscaIngrediente = receita.Ingredients.filter((ingredienteReceita) => {
-    //         return array.filter((ingrediente) => {
-    //             console.log(ingredienteReceita, ' -> ', ingrediente);
-    //             return ingredienteReceita.toLowerCase().includes(ingrediente.toLowerCase());
-    //         });
-    //     });
-    //     if(buscaIngrediente.length){
-    //         return receita;
-    //     }
-
-    // });
     renderizarReceitas(filtro);
 }
 
@@ -113,18 +105,20 @@ async function renderizarReceitas(dados: Receita[]){
         if(rootElement){   
             (textPageElement as HTMLParagraphElement).innerText = `${paginaAtual}`;    
             rootElement.innerHTML = '';
-            matrizReceitas[paginaAtual - 1].forEach((dados) => {
-                rootElement.innerHTML += `
-                    <div class="item-wrapper">
-                        <div class="img-wrapper">
-                            <img src="${dados.urlImage}" alt="Imagem da receita" width="100%" height="200px">
-                        </div>
-                        <h2 class="main-text-md center">${dados.Name}</h2>
-                        <p class="main-text-sm right">${dados.Author}</p>
-                        <p class="main-text-sm justify"> <b>Ingredients</b> <br> ${dados.Ingredients}</p>
-                        <p class="main-text-sm justify"> <b>Method</b> <br> ${dados.Method}</p>
-                    </div>`;
-            });        
+            if(matrizReceitas.length){
+                matrizReceitas[paginaAtual - 1].forEach((dados) => {
+                    rootElement.innerHTML += `
+                        <div class="item-wrapper">
+                            <div class="img-wrapper">
+                                <img src="${dados.urlImage}" alt="Imagem da receita" width="100%" height="200px">
+                            </div>
+                            <h2 class="main-text-md center">${dados.Name}</h2>
+                            <p class="main-text-sm right">${dados.Author}</p>
+                            <p class="main-text-sm justify"> <b>Ingredients</b> <br> ${dados.Ingredients}</p>
+                            <p class="main-text-sm justify"> <b>Method</b> <br> ${dados.Method}</p>
+                        </div>`;
+                });        
+            }
         }
     }
     catch{

@@ -9,6 +9,10 @@ aside{
     align-items: center;
 }
 
+aside > p{
+    padding: 10px;
+}
+
 #ingrediente-pesquisa{
     height: 24px;
     padding-left: 10px;
