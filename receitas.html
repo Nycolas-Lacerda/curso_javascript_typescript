@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./scripts/api/styles/index.css" />
+    <link rel="stylesheet" type="text/css" href="./scripts/api/styles/header.css" />
+    <link rel="stylesheet" type="text/css" href="./scripts/api/styles/aside.css" />
+    <link rel="stylesheet" type="text/css" href="./scripts/api/styles/main.css" />
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="search-header-wrapper">
+            <input type="text" id="nome-pesquisa" placeholder="Nome da Receita">
+        </div>
+    </header>
+
+    <div class="container-body">
+        <aside>
+            <div class="aside-search-wrapper">
+                <input type="text" id="ingrediente-pesquisa" placeholder="Ingredientes">
+            </div>
+
+            <p class="main-text-md">Para pesquisar mais de um ingrediente separe com ";".</p> 
+        </aside>
+        <main id="main-wrapper"></main>
+    </div>
+    <div class="pagination-wrapper">
+        <div class="pagination-button" title="Página inicial">
+            <button id="fast-backward">
+                <img src="./img/icons/fast-backward.png" alt="Página inicial" width="100%"> 
+            </button>
+        </div>
+        <div class="pagination-button" title="Página anterior">
+            <button id="backward">
+                <img src="./img/icons/backward.png" alt="Página anterior" width="100%">
+            </button>
+        </div>
+
+        <div class="pagination-label">
+            <div>
+                <p id="actual-page" class="main-text-lg"> </p>
+            </div>
+        </div>
+
+        <div class="pagination-button" title="Próxima página">
+            <button id="forward">
+                <img src="./img/icons/forward.png" alt="Próxima página" width="100%">
+            </button>
+        </div>
+        <div class="pagination-button" title="Últmia página">
+            <button id="fast-forward">
+                <img src="./img/icons/fast-forward.png" alt="Últmia página" width="100%">
+            </button>
+        </div>
+    </div>
+    <script src="./scripts/api/index.js" type="module"></script>
+</body>
+</html>
