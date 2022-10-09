@@ -99,6 +99,7 @@
 .header-input-value,
 .header-input-value::-webkit-slider-runnable-track,
 .header-input-value::-webkit-slider-thumb {
+	appearance: none;
 	-webkit-appearance: none;
 	transition: all ease 100ms;
 	height: var(--thumb-height);
