@@ -14,6 +14,26 @@ const backwardButtonElement = document.querySelector("#backward");
 const forwardButtonElement = document.querySelector("#forward");
 const fastForwardButtonElement = document.querySelector("#fast-forward");
 textPageElement.innerText = `${paginaAtual}`;
+fastBackwardButtonElement === null || fastBackwardButtonElement === void 0 ? void 0 : fastBackwardButtonElement.addEventListener('click', () => {
+    paginaAtual = 1;
+    renderizarReceitas(dados);
+});
+backwardButtonElement === null || backwardButtonElement === void 0 ? void 0 : backwardButtonElement.addEventListener('click', () => {
+    if (paginaAtual > 1) {
+        paginaAtual--;
+    }
+    renderizarReceitas(dados);
+});
+forwardButtonElement === null || forwardButtonElement === void 0 ? void 0 : forwardButtonElement.addEventListener('click', () => {
+    if (paginaAtual < calcularPaginas(dados.length) - 1) {
+        paginaAtual++;
+    }
+    renderizarReceitas(dados);
+});
+fastForwardButtonElement === null || fastForwardButtonElement === void 0 ? void 0 : fastForwardButtonElement.addEventListener('click', () => {
+    paginaAtual = calcularPaginas(dados.length) - 1;
+    renderizarReceitas(dados);
+});
 function quebraPesquisa(pesquisa) {
     let pesquisaArray;
     pesquisa = pesquisa.trim();
@@ -59,31 +79,8 @@ function paginarReceitas(dados, totalPaginas) {
     return matrizReceitas;
 }
 async function renderizarReceitas(dados) {
-    console.log(dados);
     const matrizReceitas = paginarReceitas(dados, calcularPaginas(dados.length));
     try {
-        if (calcularPaginas(dados.length) > 1) {
-            fastBackwardButtonElement === null || fastBackwardButtonElement === void 0 ? void 0 : fastBackwardButtonElement.addEventListener('click', () => {
-                paginaAtual = 1;
-                renderizarReceitas(dados);
-            });
-            backwardButtonElement === null || backwardButtonElement === void 0 ? void 0 : backwardButtonElement.addEventListener('click', () => {
-                if (paginaAtual > 1) {
-                    paginaAtual--;
-                }
-                renderizarReceitas(dados);
-            });
-            forwardButtonElement === null || forwardButtonElement === void 0 ? void 0 : forwardButtonElement.addEventListener('click', () => {
-                if (paginaAtual < calcularPaginas(dados.length) - 1) {
-                    paginaAtual++;
-                }
-                renderizarReceitas(dados);
-            });
-            fastForwardButtonElement === null || fastForwardButtonElement === void 0 ? void 0 : fastForwardButtonElement.addEventListener('click', () => {
-                paginaAtual = calcularPaginas(dados.length) - 1;
-                renderizarReceitas(dados);
-            });
-        }
         if (rootElement) {
             textPageElement.innerText = `${paginaAtual}`;
             rootElement.innerHTML = '';

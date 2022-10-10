@@ -21,6 +21,27 @@ const fastForwardButtonElement = document.querySelector("#fast-forward");
 
 (textPageElement as HTMLParagraphElement).innerText = `${paginaAtual}`;
 
+fastBackwardButtonElement?.addEventListener('click', () => {
+    paginaAtual = 1;
+    renderizarReceitas(dados);
+});
+backwardButtonElement?.addEventListener('click', () => {
+    if(paginaAtual > 1){
+        paginaAtual--;
+    }
+    renderizarReceitas(dados);
+});
+forwardButtonElement?.addEventListener('click', () => {
+    if(paginaAtual < calcularPaginas(dados.length) - 1){
+        paginaAtual++;
+    }
+    renderizarReceitas(dados);
+});
+fastForwardButtonElement?.addEventListener('click', () => {
+    paginaAtual = calcularPaginas(dados.length) - 1;
+    renderizarReceitas(dados);
+});
+
 function quebraPesquisa(pesquisa: string){
     let pesquisaArray: string[];
     pesquisa = pesquisa.trim();
@@ -74,34 +95,11 @@ function paginarReceitas(dados: Receita[], totalPaginas: number){
     return matrizReceitas;
 }
 
-async function renderizarReceitas(dados: Receita[]){
-    console.log(dados);
-    
+async function renderizarReceitas(dados: Receita[]){    
     const matrizReceitas = paginarReceitas(dados, calcularPaginas(dados.length));
     
     try{
-        if(calcularPaginas(dados.length) > 1){
-            fastBackwardButtonElement?.addEventListener('click', () => {
-                paginaAtual = 1;
-                renderizarReceitas(dados);
-            });
-            backwardButtonElement?.addEventListener('click', () => {
-                if(paginaAtual > 1){
-                    paginaAtual--;
-                }
-                renderizarReceitas(dados);
-            });
-            forwardButtonElement?.addEventListener('click', () => {
-                if(paginaAtual < calcularPaginas(dados.length) - 1){
-                    paginaAtual++;
-                }
-                renderizarReceitas(dados);
-            });
-            fastForwardButtonElement?.addEventListener('click', () => {
-                paginaAtual = calcularPaginas(dados.length) - 1;
-                renderizarReceitas(dados);
-            });
-        }
+
         if(rootElement){   
             (textPageElement as HTMLParagraphElement).innerText = `${paginaAtual}`;    
             rootElement.innerHTML = '';
